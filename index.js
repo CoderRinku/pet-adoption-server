@@ -61,6 +61,16 @@ async function run() {
             res.send(result);
         });
 
+        app.get('/my-pets', async (req, res) => {
+            let query = {};
+            if (req.query?.email) {
+                query = { authorEmail: req.query.email };
+            }
+            const cursor = petsCollection.find(query);
+            const result = await cursor.toArray();
+            res.send(result);
+        });
+
     } catch (error) {
         console.log(error);
     }
