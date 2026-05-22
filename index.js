@@ -29,6 +29,13 @@ async function run() {
         const requestsCollection = db.collection('requests');
 
         console.log("Connected to MongoDB!");
+
+        app.post('/pets', async (req, res) => {
+            const petData = req.body;
+            const result = await petsCollection.insertOne(petData);
+            res.send(result);
+        });
+
     } catch (error) {
         console.log(error);
     }
