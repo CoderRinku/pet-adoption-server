@@ -36,6 +36,19 @@ async function run() {
             res.send(result);
         });
 
+        app.get('/pets', async (req, res) => {
+            const cursor = petsCollection.find();
+            const result = await cursor.toArray();
+            res.send(result);
+        });
+
+        app.get('/pets/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: new ObjectId(id) };
+            const result = await petsCollection.findOne(query);
+            res.send(result);
+        });
+
     } catch (error) {
         console.log(error);
     }
