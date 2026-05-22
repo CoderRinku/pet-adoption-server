@@ -49,6 +49,18 @@ async function run() {
             res.send(result);
         });
 
+        app.post('/requests', async (req, res) => {
+            const requestData = req.body;
+            const result = await requestsCollection.insertOne(requestData);
+            res.send(result);
+        });
+
+        app.get('/requests', async (req, res) => {
+            const cursor = requestsCollection.find();
+            const result = await cursor.toArray();
+            res.send(result);
+        });
+
     } catch (error) {
         console.log(error);
     }
