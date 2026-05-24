@@ -7,7 +7,13 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(cors());
+app.use(cors({
+    origin: [
+        "http://localhost:5173",
+        "https://your-app-name.netlify.app"
+    ],
+    credentials: true
+}));
 app.use(express.json());
 
 const uri = process.env.MONGODB_URI;
@@ -142,3 +148,4 @@ run().catch(console.dir);
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
+module.exports = app;
