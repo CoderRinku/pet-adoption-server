@@ -146,6 +146,13 @@ app.put("/requests/:id", verifyToken, async (req, res) => {
     res.send(result);
 });
 
+app.delete("/requests/:id", verifyToken, async (req, res) => {
+    const id = req.params.id;
+    const query = { _id: new ObjectId(id) };
+    const result = await requestsCollection.deleteOne(query);
+    res.send(result);
+});
+
 if (process.env.NODE_ENV !== "production") {
     app.listen(port, () => {
         console.log(`Server running on port ${port}`);
