@@ -10,7 +10,8 @@ const port = process.env.PORT || 5000;
 app.use(cors({
     origin: [
         "http://localhost:5173",
-        "https://your-app-name.netlify.app"
+        "https://client-lake-tau.vercel.app",
+        "https://pet-adoption-platform-2ef7e.web.app"
     ],
     credentials: true
 }));
