@@ -104,7 +104,7 @@ app.get("/pets/:id", async (req, res) => {
 
 app.put("/pets/:id", verifyToken, async (req, res) => {
     const id = req.params.id;
-    const updatedPet = req.body;
+    const { _id, ...updatedPet } = req.body;
     const filter = { _id: new ObjectId(id) };
     const updateDoc = { $set: updatedPet };
     const result = await petsCollection.updateOne(filter, updateDoc);
