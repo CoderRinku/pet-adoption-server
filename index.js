@@ -8,11 +8,17 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors({
-    origin: [
-        "http://localhost:5173",
-        "https://client-lake-tau.vercel.app",
-        "https://pet-adoption-platform-2ef7e.web.app"
-    ],
+    origin: (origin, callback) => {
+        if (!origin) return callback(null, true);
+        const isLocalhost = origin.startsWith("http://localhost:") || origin.startsWith("http://127.0.0.1:");
+        const isVercel = origin.endsWith(".vercel.app");
+        const isFirebase = origin.endsWith(".web.app") || origin.endsWith(".firebaseapp.com");
+        if (isLocalhost || isVercel || isFirebase) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
     credentials: true
 }));
 app.use(express.json());
