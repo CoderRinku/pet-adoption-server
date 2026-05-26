@@ -13,7 +13,8 @@ app.use(cors({
         const isLocalhost = origin.startsWith("http://localhost:") || origin.startsWith("http://127.0.0.1:");
         const isVercel = origin.endsWith(".vercel.app");
         const isFirebase = origin.endsWith(".web.app") || origin.endsWith(".firebaseapp.com");
-        if (isLocalhost || isVercel || isFirebase) {
+        const isNetlify = origin.endsWith(".netlify.app");
+        if (isLocalhost || isVercel || isFirebase || isNetlify) {
             callback(null, true);
         } else {
             callback(new Error("Not allowed by CORS"));
